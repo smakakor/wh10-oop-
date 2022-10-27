@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
         taskCar();
@@ -27,7 +29,9 @@ public class Main {
         Car car4 = new Car("Kia","Sportage 4-го поколения",2.4,"Крвсный",2018,"Южной Корее");
         car4.PrintCar();*/
         Car car5 = new Car("Hyundai","Avante",1.6,"Оранжевый",2016,"Южной Корее",
-                "КПП", "седан","X000XX000", 5,true, null,null);
+                "КПП", "седан","X000XX000", 5,true,
+                new Car.Key(false,true),
+                new Car.Insurance(LocalDate.now(),2000,"987654321"));
         car5.PrintCar();
     }
 
