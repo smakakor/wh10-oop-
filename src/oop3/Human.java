@@ -1,3 +1,5 @@
+package oop3;
+
 public class Human {
     private String name;
     private String town;

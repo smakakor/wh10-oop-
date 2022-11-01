@@ -1,3 +1,5 @@
+package oop3;
+
 public class ValidationUtils {
 
     public static String validOrDEfault_String(String value, String defaultValue) { // проверка некоретных значений в стринг

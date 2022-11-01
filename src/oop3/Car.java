@@ -1,34 +1,23 @@
+package oop3;
+
 import java.time.LocalDate;
 
-public class Car {
-
+public class Car extends Transport {
+    // Вложеный класс "Страховка"
     public static class Insurance{
 
         private final LocalDate expireDate;
-        private final double cost;
+        private final int cost;
         private final String numberInsurance;
 
-        @Override
-        public String toString() {
-            return "Insurance{" +
-                    "expireDate=" + expireDate +
-                    ", cost=" + cost +
-                    ", numberInsurance='" + numberInsurance + '\'' +
-                    '}';
-        }
-
-        public Insurance(LocalDate expireDate, double cost, String numberInsurance) {
+        public Insurance(LocalDate expireDate, int cost, String numberInsurance) {
             if (expireDate == null) {
                 this.expireDate = LocalDate.now().plusDays(365);
             } else {
                 this.expireDate = expireDate;
             }
-            this.cost = cost;
-            if (numberInsurance == null) {
-                this.numberInsurance = "123456789";
-            } else {
-                this.numberInsurance=numberInsurance;
-            }
+            this.cost = ValidationUtils.validOrDEfault_Int(cost,15000);
+            this.numberInsurance = ValidationUtils.validOrDEfault_String(numberInsurance,"123456789");
 
         }
 
@@ -44,18 +33,35 @@ public class Car {
             return numberInsurance;
         }
 
-        public void checkExpireDate() {
-            if (expireDate.isBefore(LocalDate.now())|| expireDate.isEqual(LocalDate.now())) {
-                System.out.println("Нужно оформлять страховку");
+        public String checkExpireDate() {
+            if (getExpireDate().isBefore(LocalDate.now()) || getExpireDate().isEqual(LocalDate.now())) {
+                return "Нужно оформлять страховку";
             }
+            return "Страховка ещё действует";
         }
 
-        public void chekNumber(){
-            if (numberInsurance.length() != 9) {
-                System.out.println("Номер страховки некорректный!");
+        public String checkNumber(){
+            if (getNumberInsurance().length() != 9) {
+              return  "Номер страховки некорректный!";
             }
+            return "Номмер страховки коректный";
         }
-    }  // Вложеный конструктор "Страховка"
+
+        public Insurance(){
+            this.expireDate = null;
+            this.cost = 0;
+            this.numberInsurance = null;
+        }
+
+        @Override
+        public String toString() {
+            return  checkExpireDate() +
+                    "; цена страховки " + getCost() + "руб." +
+                    "; " + checkNumber();
+        }
+    }
+
+    // Вложеный класс "Ключ"
     public static class Key {
         private final boolean remoteRunEngine;
         private final boolean remoteKey;
@@ -68,30 +74,38 @@ public class Car {
         public boolean getRemoteRunEngine() {
             return remoteRunEngine;
         }
-
         public boolean getRemoteKey() {
             return remoteKey;
         }
+
         public Key(){
             this.remoteRunEngine = false;
             this.remoteKey = false;
         }
 
+        public String printRemoteRunEngine() {
+            if (getRemoteRunEngine()) {
+                return "Удленный запуск имеится";
+            }
+            return "Удалённй запуск отсутсвует";
+        }
+        public String printRemoteKey() {
+            if (getRemoteKey()) {
+                return "Без ключевой доступ имеится";
+            }
+            return "Без ключевой доступ отсутсвует";
+        }
+
         @Override
         public String toString() {
-            return "Key{" +
-                    "remoteRunEngine=" + remoteRunEngine +
-                    ", remoteKey=" + remoteKey +
-                    '}';
+            return printRemoteRunEngine() +
+                    "; " + printRemoteKey();
         }
-    } // Вложеный конструктор "Ключ"
+    }
 
-    private final String brand;  // Поля
-    private final String model;
+    // Поля
     private double engineVolume;
-    private String color;
-    private final int productionYear;
-    private final String productionCountry;
+    //oop2
     private String transmission;
     private final String body;
     public String registrationNumber;
@@ -99,12 +113,17 @@ public class Car {
     private boolean winterTires;
     private Key key;
     private final Insurance insurance;
-    public Car(String brand,                // Конструктор для класса "Машина"
+
+
+    // Конструктор для класса "Машина"
+    public Car(String brand,
                String model,
                double engineVolume,
-               String color,
+               String colorBody,
                int productionYear,
                String productionCountry,
+               int maxSpeed,
+               //oop2
                String transmission,
                String body,
                String registrationNumber,
@@ -112,38 +131,39 @@ public class Car {
                boolean winterTies,
                Key key,
                Insurance insurance) {
-        this.brand = ValidationUtils.validOrDEfault_String(brand,"default");                                //Проверка на некоректные данные
-        this.model = ValidationUtils.validOrDEfault_String(model, "default");                               //Проверка на некоректные данные
-        this.engineVolume = Math.max(engineVolume, 0);                                                                 //Проверка на некоректные данные
-        this.productionCountry = ValidationUtils.validOrDEfault_String(productionCountry, "default");       //Проверка на некоректные данные
-        this.productionYear = ValidationUtils.validOrDEfault_Int(productionYear, 2000);                     //Проверка на некоректные данные
-        this.color = ValidationUtils.validOrDEfault_String(color, "white");                                 //Проверка на некоректные данные
+
+        super(brand, model, productionYear, productionCountry,
+                colorBody, maxSpeed);
+
+        this.engineVolume = Math.max(engineVolume, 0);
 //oop2
-        this.transmission = ValidationUtils.validOrDEfault_String(transmission, "default");                 //Проверка на некоректные данные
-        this.body = ValidationUtils.validOrDEfault_String(body, "default");                                 //Проверка на некоректные данные
-        this.registrationNumber = registrationNumber;                                                                   //Проверка на некоректные данные
+
+        this.transmission = ValidationUtils.validOrDEfault_String(transmission, "default");
+        this.body = ValidationUtils.validOrDEfault_String(body, "default");
+        this.registrationNumber = registrationNumber;
         if (isRegistrationNumber()) {
             this.registrationNumber = registrationNumber;
         }else {
             this.registrationNumber = "default";
         }
-        this.totalPlace = ValidationUtils.validOrDEfault_Int(totalPlace, 0);                                //Проверка на некоректные данные
-        if (winterTies && (LocalDate.now().getMonthValue() <= 4 || LocalDate.now().getMonthValue() >=11)){              //Проверка на некоректные данные
+        this.totalPlace = ValidationUtils.validOrDEfault_Int(totalPlace, 0);
+        if (winterTies && (LocalDate.now().getMonthValue() <= 4 || LocalDate.now().getMonthValue() >=11)){
             this.winterTires = true;
         }else{
             this.winterTires = false;
         }
-        if (key == null) {                                                                                              //Проверка на некоректные данные
+        if (key == null) {
             this.key = new Key();
         } else {
             this.key = key;
-        }                                                                              //Проверка на некоректные данные
-        if (insurance == null) {                                                                                              //Проверка на некоректные данные
-            this.insurance = new Insurance(null,0,null);
+        }
+        if (insurance == null) {
+            this.insurance = new Insurance();
         } else {
             this.insurance = insurance;
         }
     }
+
 
     public boolean isRegistrationNumber() {
         if (registrationNumber.length() != 9) {
@@ -160,36 +180,21 @@ public class Car {
                 Character.isDigit(chars[7]) &&
                 Character.isDigit(chars[8]);
     }
-    void PrintCar() {
+
+    public void PrintCar() {
         System.out.println(getBrand() +
                 " " + getModel() +
                 "; год выпуска: " + getProductionYear() + ";" +
                 " производитель: " + getProductionCountry() +
-                "; цвет: " + getColor() +
+                "; цвет: " + getColorBody() +
                 "; объем двагателя: " + getEngineVolume() + " л.;" +
                 "коробка передач: " + getTransmission() +
                 "; тип кузова: " + getBody() +
                 "; регистрационный номер: " + getRegistrationNumber()+
                 "; количество мест: " + getTotalPlace() +
                 "; резина: " + (getWinterTires()? "зимния":"летния") +
-                "; Удаленный запуск двигателя " + (getKey())+
-                "; страховка " + (getInsurance()));
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getProductionYear() {
-        return productionYear;
-    }
-
-    public String getProductionCountry() {
-        return productionCountry;
+                "; " + (getKey())+
+                "; " + (getInsurance()));
     }
 
     public String getBody() {
@@ -206,14 +211,6 @@ public class Car {
 
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = engineVolume;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getTransmission() {
@@ -253,8 +250,12 @@ public class Car {
         }
     }
 
-
     public Insurance getInsurance() {
         return this.insurance;
     }
+
+    public void refill(){
+        System.out.println("можно заправлять бензином, дизелем на заправке или заряжать на специальных электропарковках, если это электрокар");
+    };
+
 }
