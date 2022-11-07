@@ -1,11 +1,20 @@
 package oop4.Transport;
 
+import oop4.Transport.autoBody.AutoBodyCar;
+
 //лековые машины
 public class Car extends Transport implements Competing {
 
+    private AutoBodyCar autoBodyCar;
+
     // констуктор
-    public Car(String brand, String model, double engineVolume) {
+    public Car(String brand, String model, double engineVolume,AutoBodyCar autoBodyCar) {
         super(brand, model, engineVolume);
+        this.autoBodyCar= autoBodyCar;
+    }
+
+    public AutoBodyCar getAutoBodyCar() {
+        return autoBodyCar;
     }
 
     @Override

@@ -1,11 +1,17 @@
 package oop4.Transport;
 
+import oop4.Transport.autoBody.AutoBodyBuss;
+import oop4.Transport.autoBody.AutoBodyCar;
+
 // автобусы
 public class Buss extends Transport implements Competing {
 
+    private AutoBodyBuss autoBodyBuss;
+
     // констуктор
-    public Buss(String brand, String model, double engineVolume) {
+    public Buss(String brand, String model, double engineVolume,AutoBodyBuss autoBodyBuss) {
         super(brand, model, engineVolume);
+        this.autoBodyBuss = autoBodyBuss;
     }
 
     @Override
