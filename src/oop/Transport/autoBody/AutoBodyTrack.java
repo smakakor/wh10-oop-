@@ -1,4 +1,4 @@
-package oop4.Transport.autoBody;
+package oop.Transport.autoBody;
 
 public enum AutoBodyTrack {
     N1(0D, 3.5),

@@ -1,7 +1,6 @@
-package oop4.Transport;
+package oop.Transport;
 
-import oop4.Transport.autoBody.AutoBodyBuss;
-import oop4.Transport.autoBody.AutoBodyCar;
+import oop.Transport.autoBody.AutoBodyBuss;
 
 // автобусы
 public class Buss extends Transport implements Competing {
@@ -27,5 +26,11 @@ public class Buss extends Transport implements Competing {
     @Override
     public int maxSpeed() {
         return 0;
+    }
+
+    @Override
+    public boolean getDiagnosed() {
+        System.out.println("Автобус "+ getBrand()+ " " + getBrand() + " в диагностике не требуется");
+        return true;
     }
 }

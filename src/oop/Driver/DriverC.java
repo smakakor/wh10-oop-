@@ -1,6 +1,6 @@
-package oop4.Driver;
+package oop.Driver;
 
-import oop4.Transport.Truck;
+import oop.Transport.Truck;
 
 public class DriverC extends Driver<Truck>{
     public DriverC(String fullName, String rights, int experience, Truck car) {

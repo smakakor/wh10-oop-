@@ -1,6 +1,6 @@
-package oop4.Transport;
+package oop.Transport;
 
-import oop4.Transport.autoBody.AutoBodyTrack;
+import oop.Transport.autoBody.AutoBodyTrack;
 
 // грузовые автомобили
 public class Truck extends Transport implements Competing {
@@ -26,5 +26,10 @@ public class Truck extends Transport implements Competing {
     @Override
     public int maxSpeed() {
         return 0;
+    }
+
+    @Override
+    public boolean getDiagnosed() {
+        return Math.random()>0.5;
     }
 }

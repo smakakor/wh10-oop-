@@ -1,5 +1,5 @@
-package oop4.Driver;
-import oop4.Transport.Car;
+package oop.Driver;
+import oop.Transport.Car;
 
 public class DriverB extends Driver<Car> {
 

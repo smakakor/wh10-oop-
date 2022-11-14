@@ -1,6 +1,6 @@
-package oop4.Transport;
+package oop.Transport;
 
-import oop4.Transport.autoBody.AutoBodyCar;
+import oop.Transport.autoBody.AutoBodyCar;
 
 //лековые машины
 public class Car extends Transport implements Competing {
@@ -31,5 +31,10 @@ public class Car extends Transport implements Competing {
     @Override
     public int maxSpeed() {
         return 250;
+    }
+
+    @Override
+    public boolean getDiagnosed() {
+       return Math.random() > 0.6;
     }
 }

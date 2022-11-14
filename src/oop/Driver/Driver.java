@@ -1,17 +1,17 @@
-package oop4.Driver;
+package oop.Driver;
 
-import oop4.Transport.Transport;
+import oop.Transport.Transport;
 
 public class Driver<T extends Transport> {
     private final String fullName;
-    private final String rights; // права
+    private String rights; // права
     private final int experience; // стаж
     private final T car;
 
 
     public Driver(String fullName, String rights, int experience, T car) {
         this.fullName = fullName;
-        this.rights = rights;
+        setRights(rights);
         this.experience = experience;
         this.car = car;
     }
@@ -19,18 +19,29 @@ public class Driver<T extends Transport> {
     public String getFullName() {
         return fullName;
     }
-    public String isRights() {
+
+
+    public String getRights() {
         return rights;
     }
+
+    public void setRights(String rights) {
+        if (getRights() == null) {
+            throw new IllegalArgumentException("Необходимо указать категорию");
+        }
+        this.rights = rights;
+    }
+
     public int getExperience() {
         return experience;
     }
+
     public T getCar() {
         return car;
     }
 
     public void startMoving() {
-        System.out.println(getFullName() + " на " + car.getBrand() + " " + car.getModel()+ " начал движение");
+        System.out.println(getFullName() + " на " + car.getBrand() + " " + car.getModel() + " начал движение");
     }
 
     public void stopMoving() {

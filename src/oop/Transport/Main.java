@@ -1,14 +1,13 @@
-package oop4.Transport;
+package oop.Transport;
 
-import oop4.Driver.Driver;
-import oop4.Driver.DriverB;
-import oop4.Transport.autoBody.AutoBodyBuss;
-import oop4.Transport.autoBody.AutoBodyCar;
-import oop4.Transport.autoBody.AutoBodyTrack;
+import oop.Transport.autoBody.AutoBodyBuss;
+import oop.Transport.autoBody.AutoBodyCar;
+import oop.Transport.autoBody.AutoBodyTrack;
+import oop.exceptions.ExceptionsTask;
 
 public class Main {
     public static void main(String[] args) {
-        taskTransport();
+        taskExceptions();
     }
 
     public static void taskTransport() {
@@ -31,5 +30,9 @@ public class Main {
         trucks1.pitStop();
     }
 
+    public static void taskExceptions() {
+        boolean test = ExceptionsTask.inputErrorCheck("login","123_qwe","123_qwe");
+        System.out.println(test);
+    }
 
 }

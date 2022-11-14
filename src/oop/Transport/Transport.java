@@ -1,4 +1,4 @@
-package oop4.Transport;
+package oop.Transport;
 
 public abstract class Transport {
     private String brand;
@@ -49,5 +49,7 @@ public abstract class Transport {
     public void finishMoving() {
         System.out.println(getBrand() + getModel() + " закончить движение");
     }
+
+    public abstract boolean getDiagnosed ();
 
 }

@@ -1,4 +1,4 @@
-package oop4.Transport.autoBody;
+package oop.Transport.autoBody;
 
 public enum AutoBodyBuss {
     ESPECIALLY_SMALL(0,10),

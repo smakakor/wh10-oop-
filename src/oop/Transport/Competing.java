@@ -1,4 +1,4 @@
-package oop4.Transport;
+package oop.Transport;
 
 public interface Competing {
 
