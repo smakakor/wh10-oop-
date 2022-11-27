@@ -2,7 +2,7 @@ package oop.Driver;
 
 import oop.Transport.Transport;
 
-public class Driver<T extends Transport> {
+public class Driver<T extends Transport>  {
     private final String fullName;
     private String rights; // права
     private final int experience; // стаж
@@ -26,7 +26,7 @@ public class Driver<T extends Transport> {
     }
 
     public void setRights(String rights) {
-        if (getRights() == null) {
+        if (rights == null) {
             throw new IllegalArgumentException("Необходимо указать категорию");
         }
         this.rights = rights;

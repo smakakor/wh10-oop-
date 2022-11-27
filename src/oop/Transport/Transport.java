@@ -1,14 +1,51 @@
 package oop.Transport;
 
+import oop.Driver.Driver;
+import oop.Transport.List.Mechanic;
+import oop.Transport.List.Sponsor;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class Transport {
     private String brand;
     private String model;
     private double engineVolume;
+    private  List<Driver<?>> driver = new ArrayList<>();
+    private final List<Sponsor> sponsors = new ArrayList<>();
+    private final List<Mechanic> mechanics = new ArrayList<>();
 
     public Transport(String brand, String model, double engineVolume) {
         setBrand(brand);
         setModel(model);
         setEngineVolume(engineVolume);
+    }
+
+    public List<Driver<?>> getDriver() {
+        return driver;
+    }
+
+    public void setDriver(List<Driver<?>> driver) {
+        this.driver = driver;
+    }
+
+    public void addDriver(Driver driver) {
+        this.driver.add(driver);
+    }
+    public void addSponsor(Sponsor... sponsor) {
+        this.sponsors.addAll(Arrays.asList(sponsor));
+    }
+    public void addMechanical(Mechanic mechanic) {
+        this.mechanics.add(mechanic);
+    }
+
+    public List<Sponsor> getSponsors() {
+        return sponsors;
+    }
+
+    public List<Mechanic> getMechanics() {
+        return mechanics;
     }
 
     public String getBrand() {
@@ -26,6 +63,7 @@ public abstract class Transport {
     public void setModel(String model) {
         this.model = ValidationUtils.validOrDEfault_String(model, "default");
     }
+
     public double getEngineVolume() {
         return engineVolume;
     }
@@ -50,6 +88,6 @@ public abstract class Transport {
         System.out.println(getBrand() + getModel() + " закончить движение");
     }
 
-    public abstract boolean getDiagnosed ();
+    public abstract boolean getDiagnosed();
 
 }
