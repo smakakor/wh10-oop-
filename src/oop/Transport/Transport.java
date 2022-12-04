@@ -4,17 +4,15 @@ import oop.Driver.Driver;
 import oop.Transport.List.Mechanic;
 import oop.Transport.List.Sponsor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public abstract class Transport {
     private String brand;
     private String model;
     private double engineVolume;
     private  List<Driver<?>> driver = new ArrayList<>();
-    private final List<Sponsor> sponsors = new ArrayList<>();
-    private final List<Mechanic> mechanics = new ArrayList<>();
+    private final Set<Sponsor> sponsors = new HashSet<>();
+    private final Set<Mechanic> mechanics = new HashSet<>();
 
     public Transport(String brand, String model, double engineVolume) {
         setBrand(brand);
@@ -40,11 +38,11 @@ public abstract class Transport {
         this.mechanics.add(mechanic);
     }
 
-    public List<Sponsor> getSponsors() {
+    public Set<Sponsor> getSponsors() {
         return sponsors;
     }
 
-    public List<Mechanic> getMechanics() {
+    public Set<Mechanic> getMechanics() {
         return mechanics;
     }
 

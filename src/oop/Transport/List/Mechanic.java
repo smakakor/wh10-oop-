@@ -3,6 +3,7 @@ package oop.Transport.List;
 import oop.Transport.Transport;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Mechanic {
     private final String nameOfSurname;
@@ -35,5 +36,19 @@ public class Mechanic {
 
     public MachanicalTypeTransport getType() {
         return type;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mechanic mechanic = (Mechanic) o;
+        return Objects.equals(nameOfSurname, mechanic.nameOfSurname) && Objects.equals(companyMechanical, mechanic.companyMechanical);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nameOfSurname, companyMechanical);
     }
 }
